@@ -193,7 +193,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.storage_manager.enabled=true
 
 # Boot Animation
-#$(call inherit-product, vendor/invictus/config/bootanimation.mk)
+PRODUCT_PACKAGES += \
+    bootanimation.zip
 
 # easy way to extend to add more packages
 -include vendor/extra/product.mk
