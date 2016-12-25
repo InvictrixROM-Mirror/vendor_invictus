@@ -205,3 +205,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.invictus.version=$(INV_VERSION) \
     ro.modversion=$(INV_MOD_VERSION) \
     ro.invictus.buildtype=$(INV_BUILD_TYPE)
+
+# Google sounds
+include vendor/invictus/google/GoogleAudio.mk

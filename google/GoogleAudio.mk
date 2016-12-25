@@ -67,3 +67,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/ringtones/Spaceship.ogg:system/media/audio/ringtones/Spaceship.ogg \
     $(LOCAL_PATH)/ringtones/Summer_night.ogg:system/media/audio/ringtones/Summer_night.ogg \
     $(LOCAL_PATH)/ringtones/Zen.ogg:system/media/audio/ringtones/Zen.ogg
+
+PRODUCT_PROPERTY_OVERRIDES := \
+   ro.config.ringtone=Zen.ogg \
+   ro.config.notification_sound=Chime.ogg
