@@ -24,6 +24,11 @@ PRODUCT_COPY_FILES += \
     vendor/invictus/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions \
     vendor/invictus/prebuilt/common/bin/50-invictus.sh:system/addon.d/50-invictus.sh
 
+# Substratum Clean Tool
+PRODUCT_COPY_FILES += \
+    vendor/invictus/prebuilt/common/bin/substraumclean.sh:install/bin/substraumclean.sh \
+it
+
 # Backup services whitelist
 PRODUCT_COPY_FILES += \
     vendor/invictus/config/permissions/backup.xml:system/etc/sysconfig/backup.xml
