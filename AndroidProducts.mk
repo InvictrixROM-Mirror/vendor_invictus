@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-. "$(gettop)/vendor/invictus/build/envsetup.sh"
 
-invictus_device_combos
-gzosp_device_combos
-add_lunch_combo omni_emulator-userdebug
+PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/utils/emulator/omni_emulator.mk
