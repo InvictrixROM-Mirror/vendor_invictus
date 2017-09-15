@@ -1,2 +1,2 @@
 BOARD_SEPOLICY_DIRS += \
-    vendor/deso/sepolicy/qcom
+    vendor/invictus/sepolicy/qcom

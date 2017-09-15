@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # ------ CONFIGURATION ------
-FILE_MATCH=Desolation*.zip
-DEVICE=$DESO_BUILD
+FILE_MATCH=Invictus*.zip
+DEVICE=$INV_BUILD
 OLD_BUILD=`ls -t /usr/share/nginx/html/ota/delta/builds/$DEVICE/$FILE_MATCH | head -n1`
 CURRENT_BUILD=`ls -t $ANDROID_PRODUCT_OUT/$FILE_MATCH | head -n1`
 BASEOLDNAME=$(echo $OLD_BUILD | awk -F/ '{print $NF}')

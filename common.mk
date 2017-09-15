@@ -20,27 +20,27 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 
 # Backup Tool
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
-    vendor/deso/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions
+    vendor/invictus/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
+    vendor/invictus/prebuilt/common/bin/backuptool.functions:install/bin/backuptool.functions
 
 # Substratum Clean Tool
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/bin/substraumclean.sh:install/bin/substraumclean.sh \
+    vendor/invictus/prebuilt/common/bin/substraumclean.sh:install/bin/substraumclean.sh \
 
 # init.d support
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/bin/sysinit:system/bin/sysinit \
-    vendor/deso/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
-    vendor/deso/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
+    vendor/invictus/prebuilt/common/bin/sysinit:system/bin/sysinit \
+    vendor/invictus/prebuilt/common/etc/init.d/00banner:system/etc/init.d/00banner \
+    vendor/invictus/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 
 # Init file
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/etc/init.local.rc:root/init.local.rc
+    vendor/invictus/prebuilt/common/etc/init.local.rc:root/init.local.rc
 
 # Bring in camera effects
 PRODUCT_COPY_FILES +=  \
-    vendor/deso/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
-    vendor/deso/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
+    vendor/invictus/prebuilt/common/media/LMprec_508.emd:system/media/LMprec_508.emd \
+    vendor/invictus/prebuilt/common/media/PFFprec_600.emd:system/media/PFFprec_600.emd
 
 # Enable SIP+VoIP on all targets
 PRODUCT_COPY_FILES += \
@@ -78,7 +78,6 @@ PRODUCT_PACKAGES += \
     NovaLauncher \
     OmniJaws \
     OmniStyle \
-    DesoHeaders \
     WelcomeBack
 
 ifneq ($(HAS_DEVICE_CAM),true)
@@ -146,22 +145,22 @@ endif
 
 # World APN list
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+    vendor/invictus/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Selective SPN list for operator number who has the problem.
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/etc/selective-spn-conf.xml:system/etc/selective-spn-conf.xml
+    vendor/invictus/prebuilt/common/etc/selective-spn-conf.xml:system/etc/selective-spn-conf.xml
 
 PRODUCT_PACKAGE_OVERLAYS += \
-	vendor/deso/overlay/common
+	vendor/invictus/overlay/common
 
 # Proprietary latinime libs needed for Keyboard swyping
 ifneq ($(filter arm64,$(TARGET_ARCH)),)
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
+    vendor/invictus/prebuilt/common/lib/libjni_latinime.so:system/lib/libjni_latinime.so
 else
 PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so
+    vendor/invictus/prebuilt/common/lib64/libjni_latinime.so:system/lib64/libjni_latinime.so
 endif
 
 # by default, do not update the recovery with system updates
@@ -175,92 +174,91 @@ endif
 endif
 
 # Boot animation include
-ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
+#ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
 
 # determine the smaller dimension
-TARGET_BOOTANIMATION_SIZE := $(shell \
-  if [ $(TARGET_SCREEN_WIDTH) -lt $(TARGET_SCREEN_HEIGHT) ]; then \
-    echo $(TARGET_SCREEN_WIDTH); \
-  else \
-    echo $(TARGET_SCREEN_HEIGHT); \
-  fi )
+#TARGET_BOOTANIMATION_SIZE := $(shell \
+#  if [ $(TARGET_SCREEN_WIDTH) -lt $(TARGET_SCREEN_HEIGHT) ]; then \
+#    echo $(TARGET_SCREEN_WIDTH); \
+#  else \
+#    echo $(TARGET_SCREEN_HEIGHT); \
+#  fi )
 
 # get a sorted list of the sizes
-bootanimation_sizes := $(subst .zip,, $(shell ls vendor/deso/prebuilt/common/bootanimation))
-bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
+#bootanimation_sizes := $(subst .zip,, $(shell ls vendor/invictus/prebuilt/common/bootanimation))
+#bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
 
 # find the appropriate size and set
-define check_and_set_bootanimation
-$(eval TARGET_BOOTANIMATION_NAME := $(shell \
-  if [ -z "$(TARGET_BOOTANIMATION_NAME)" ]; then
-    if [ $(1) -le $(TARGET_BOOTANIMATION_SIZE) ]; then \
-      echo $(1); \
-      exit 0; \
-    fi;
-  fi;
-  echo $(TARGET_BOOTANIMATION_NAME); ))
-endef
-$(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
+#define check_and_set_bootanimation
+#$(eval TARGET_BOOTANIMATION_NAME := $(shell \
+#  if [ -z "$(TARGET_BOOTANIMATION_NAME)" ]; then
+#    if [ $(1) -le $(TARGET_BOOTANIMATION_SIZE) ]; then \
+#      echo $(1); \
+#      exit 0; \
+#    fi;
+#  fi;
+#  echo $(TARGET_BOOTANIMATION_NAME); ))
+#endef
+#$(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
 
-ifeq ($(TARGET_BOOTANIMATION_HALF_RES),true)
-PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
-else
-PRODUCT_COPY_FILES += \
-    vendor/deso/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
-endif
-endif
+#ifeq ($(TARGET_BOOTANIMATION_HALF_RES),true)
+#PRODUCT_COPY_FILES += \
+#    vendor/invictus/prebuilt/common/bootanimation/halfres/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
+#else
+#PRODUCT_COPY_FILES += \
+#    vendor/invictus/prebuilt/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip:system/media/bootanimation.zip
+#endif
+#endif
 
 # Versioning System
-# Desolation first version.
 PRODUCT_VERSION_MAJOR = 8.0.0
 PRODUCT_VERSION_MINOR = v1.0
 #PRODUCT_VERSION_MAINTENANCE = O
-ifdef DESO_BUILD_EXTRA
-    DESO_POSTFIX := -$(DESO_BUILD_EXTRA)
+ifdef INV_BUILD_EXTRA
+    INV_POSTFIX := -$(INV_BUILD_EXTRA)
 else
-    DESO_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
+    INV_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 endif
 
 ifdef BUILDTYPE_EXPERIMENTAL
-    DESO_BUILD_TYPE := Experimental
+    INV_BUILD_TYPE := Experimental
 endif
 
 ifdef BUILDTYPE_NIGHTLY
-    DESO_BUILD_TYPE := Nightly
+    INV_BUILD_TYPE := Nightly
 endif
 
 ifdef BUILDTYPE_WEEKLY
-    DESO_BUILD_TYPE := Weekly
+    INV_BUILD_TYPE := Weekly
 endif
 
 ifdef BUILDTYPE_RELEASE
-    DESO_BUILD_TYPE := Release
+    INV_BUILD_TYPE := Release
 endif
 
-ifdef DESO_BUILD_TYPE
-    DESO_BUILD_TYPE := $(DESO_BUILD_TYPE)
+ifdef INV_BUILD_TYPE
+    INV_BUILD_TYPE := $(INV_BUILD_TYPE)
 else
-    DESO_BUILD_TYPE := Unofficial
+    INV_BUILD_TYPE := Unofficial
 endif
 
 # Set all versions
-DESO_VERSION := Desolation-$(DESO_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(DESO_BUILD_TYPE)$(DESO_POSTFIX)
-OTA_VERSION := Desolation-$(DESO_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(DESO_BUILD_TYPE)$(DESO_POSTFIX)
-DESO_MOD_VERSION := Desolation-$(DESO_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(DESO_BUILD_TYPE)$(DESO_POSTFIX)
+INV_VERSION := Invictus-$(INV_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(INV_BUILD_TYPE)$(INV_POSTFIX)
+OTA_VERSION := Invictus-$(INV_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(INV_BUILD_TYPE)$(INV_POSTFIX)
+INV_MOD_VERSION := Invictus-$(INV_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(INV_BUILD_TYPE)$(INV_POSTFIX)
 
 PRODUCT_PROPERTY_OVERRIDES += \
     BUILD_DISPLAY_ID=$(BUILD_ID) \
-    ro.deso.version=$(DESO_VERSION) \
-    ro.deso.otaversion=$(OTA_VERSION) \
-    ro.modversion=$(DESO_MOD_VERSION) \
-    ro.deso.buildtype=$(DESO_BUILD_TYPE)
+    ro.invictus.version=$(INV_VERSION) \
+    ro.invictus.otaversion=$(OTA_VERSION) \
+    ro.modversion=$(INV_MOD_VERSION) \
+    ro.invictus.buildtype=$(INV_BUILD_TYPE)
 
 $(call inherit-product-if-exists, vendor/extra/product.mk)
 
 # Include SDCLANG definitions if it is requested and available
 ifeq ($(HOST_OS),linux)
     ifneq ($(wildcard vendor/qcom/sdclang-3.8/),)
-        include vendor/deso/sdclang/sdclang.mk
+        include vendor/invictus/sdclang/sdclang.mk
     endif
 endif

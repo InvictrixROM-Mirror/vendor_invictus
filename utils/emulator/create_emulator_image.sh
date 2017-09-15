@@ -17,9 +17,9 @@ fi
 
 # creates image zip in /tmp/
 cd $ANDROID_BUILD_TOP
-cp -r vendor/deso/utils/emulator/skins $ANDROID_PRODUCT_OUT
-cp -r vendor/deso/utils/emulator/start_emulator_image.sh $ANDROID_PRODUCT_OUT
-cp -r vendor/deso/utils/emulator/advancedFeatures.ini $ANDROID_PRODUCT_OUT
+cp -r vendor/invictus/utils/emulator/skins $ANDROID_PRODUCT_OUT
+cp -r vendor/invictus/utils/emulator/start_emulator_image.sh $ANDROID_PRODUCT_OUT
+cp -r vendor/invictus/utils/emulator/advancedFeatures.ini $ANDROID_PRODUCT_OUT
 
 cd $ANDROID_PRODUCT_OUT/..
 zip -r /tmp/omni_emulator.zip generic_x86/skins generic_x86/system.img generic_x86/system/build.prop generic_x86/cache.img generic_x86/userdata.img generic_x86/start_emulator_image.sh generic_x86/advancedFeatures.ini

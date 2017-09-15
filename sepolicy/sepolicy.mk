@@ -4,4 +4,4 @@
 #
 
 BOARD_SEPOLICY_DIRS += \
-    vendor/deso/sepolicy
+    vendor/invictus/sepolicy
