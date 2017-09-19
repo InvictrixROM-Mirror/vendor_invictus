@@ -171,6 +171,10 @@ WITH_CM_CHARGER := false
 PRODUCT_PACKAGES += \
     ThemeInterfacer
 
+# Turbo
+PRODUCT_PACKAGES += \
+    Turbo
+
 # Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
     libffmpeg_extractor \
