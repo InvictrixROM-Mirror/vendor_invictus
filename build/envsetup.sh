@@ -1,11 +1,11 @@
-# gzosp functions that extend build/envsetup.sh
+# invictus functions that extend build/envsetup.sh
 
-function gzosp_device_combos()
+function invictus_device_combos()
 {
     local T list_file variant device
 
     T="$(gettop)"
-    list_file="${T}/vendor/gzosp/gzosp.devices"
+    list_file="${T}/vendor/invictus/invictus.devices"
     variant="userdebug"
 
     if [[ $1 ]]
@@ -27,43 +27,67 @@ function gzosp_device_combos()
     if [[ ! -f "${list_file}" ]]
     then
         echo "unable to find device list: ${list_file}"
-        list_file="${T}/vendor/gzosp/gzosp.devices"
+        list_file="${T}/vendor/invictus/invictus.devices"
         echo "defaulting device list file to: ${list_file}"
     fi
 
     while IFS= read -r device
     do
-        add_lunch_combo "gzosp_${device}-${variant}"
+        add_lunch_combo "inv_${device}-${variant}"
     done < "${list_file}"
 }
 
-function gzosp_rename_function()
+function invictus_rename_function()
 {
-    eval "original_gzosp_$(declare -f ${1})"
+    eval "original_invictus_$(declare -f ${1})"
 }
 
-function _gzosp_build_hmm() #hidden
+function _invictus_build_hmm() #hidden
 {
     printf "%-8s %s" "${1}:" "${2}"
 }
 
-function gzosp_append_hmm()
+function invictus_append_hmm()
 {
-    HMM_DESCRIPTIVE=("${HMM_DESCRIPTIVE[@]}" "$(_gzosp_build_hmm "$1" "$2")")
+    HMM_DESCRIPTIVE=("${HMM_DESCRIPTIVE[@]}" "$(_invictus_build_hmm "$1" "$2")")
 }
 
-function gzosp_add_hmm_entry()
+function invictus_add_hmm_entry()
 {
     for c in ${!HMM_DESCRIPTIVE[*]}
     do
         if [[ "${1}" == $(echo "${HMM_DESCRIPTIVE[$c]}" | cut -f1 -d":") ]]
         then
-            HMM_DESCRIPTIVE[${c}]="$(_gzosp_build_hmm "$1" "$2")"
+            HMM_DESCRIPTIVE[${c}]="$(_invictus_build_hmm "$1" "$2")"
             return
         fi
     done
-    gzosp_append_hmm "$1" "$2"
+    invictus_append_hmm "$1" "$2"
 }
+
+function invictusremote()
+{
+    local proj pfx project
+
+    if ! git rev-parse &> /dev/null
+    then
+        echo "Not in a git directory. Please run this from an Android repository you wish to set up."
+        return
+    fi
+    git remote rm invictus 2> /dev/null
+
+    proj="$(pwd -P | sed "s#$ANDROID_BUILD_TOP/##g")"
+
+    if (echo "$proj" | egrep -q 'external|system|build|bionic|art|libcore|prebuilt|dalvik') ; then
+        pfx="android_"
+    fi
+
+    project="${proj//\//_}"
+
+    git remote add inv "git@github.com:InvictusRom/$pfx$project"
+    echo "Remote 'inv' created"
+}
+
 
 function gzospremote()
 {
@@ -171,20 +195,20 @@ function gzosp_push()
 }
 
 
-gzosp_rename_function hmm
+invictus_rename_function hmm
 function hmm() #hidden
 {
     local i T
     T="$(gettop)"
-    original_gzosp_hmm
+    original_invictus_hmm
     echo
 
-    echo "vendor/gzosp extended functions. The complete list is:"
-    for i in $(grep -P '^function .*$' "$T/vendor/gzosp/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
+    echo "vendor/invictus extended functions. The complete list is:"
+    for i in $(grep -P '^function .*$' "$T/vendor/invictus/build/envsetup.sh" | grep -v "#hidden" | sed 's/function \([a-z_]*\).*/\1/' | sort | uniq); do
         echo "$i"
     done |column
 }
 
-gzosp_append_hmm "gzospremote" "Add a git remote for matching gzosp repository"
-gzosp_append_hmm "aospremote" "Add git remote for matching AOSP repository"
-gzosp_append_hmm "cafremote" "Add git remote for matching CodeAurora repository."
+invictus_append_hmm "gzospremote" "Add a git remote for matching gzosp repository"
+invictus_append_hmm "aospremote" "Add git remote for matching AOSP repository"
+invictus_append_hmm "cafremote" "Add git remote for matching CodeAurora repository."

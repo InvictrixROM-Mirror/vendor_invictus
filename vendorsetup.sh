@@ -1,3 +1,3 @@
-. "$(gettop)/vendor/gzosp/build/envsetup.sh"
+. "$(gettop)/vendor/invictus/build/envsetup.sh"
 
-gzosp_device_combos
+invictus_device_combos
