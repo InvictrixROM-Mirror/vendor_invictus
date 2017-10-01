@@ -113,6 +113,8 @@ PRODUCT_PACKAGES += \
     ntfsfix \
     ntfs-3g
 
+WITH_CM_CHARGER := false
+
 # MusicFX advanced effects
 #ifneq ($(TARGET_NO_DSPMANAGER), true)
 #PRODUCT_PACKAGES += \
