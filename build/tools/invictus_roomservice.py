@@ -111,7 +111,7 @@ def get_default(manifest=None):
 
 def get_default_revision(manifest=None):
     r = get_default(manifest=manifest).get('revision')
-    return r.replace('refs/heads/', '').replace('refs/tags/', '')
+    return r
 
 
 def get_remote(manifest=None, remote_name=None):
