@@ -42,7 +42,7 @@ except ImportError:
 
 DEBUG = False
 default_manifest = ".repo/manifests/custom.xml"
-custom_local_manifest = ".repo/local_manifests/gzosp_manifest.xml"
+custom_local_manifest = ".repo/local_manifests/invictus_manifest.xml"
 custom_default_revision = "8.0"
 custom_dependencies = "gzosp.dependencies"
 org_manifest = "GZOSP-Devices"  # leave empty if org is provided in manifest
