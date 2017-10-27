@@ -75,7 +75,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Basic \
     LiveWallpapersPicker \
-    PhaseBeam
+    PhaseBeam \
+    SnapdragonGallery
 
 # Include explicitly to work around GMS issues
 PRODUCT_PACKAGES += \
