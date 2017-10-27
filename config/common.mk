@@ -167,6 +167,10 @@ WITH_CM_CHARGER := false
 #ifeq ($(DEFAULT_ROOT_METHOD),rootless)
 #endif
 
+# ThemeInterfacer
+PRODUCT_PACKAGES += \
+    ThemeInterfacer
+
 # Stagefright FFMPEG plugin
 PRODUCT_PACKAGES += \
     libffmpeg_extractor \
