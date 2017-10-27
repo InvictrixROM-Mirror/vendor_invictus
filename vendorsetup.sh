@@ -17,4 +17,5 @@
 
 invictus_device_combos
 gzosp_device_combos
+lineage_device_combos
 add_lunch_combo omni_emulator-userdebug
