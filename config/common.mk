@@ -215,6 +215,14 @@ ifndef INV_BUILD_TYPE
     INV_BUILD_TYPE := UNOFFICIAL
 endif
 
+ifeq ($(INV_MAINTAINER),)
+ifneq ($(shell git config --get user.name),)
+INV_MAINTAINER := $(shell git config --get user.name)
+else
+INV_MAINTAINER := $(shell echo $USERNAME)
+endif
+endif
+
 # Set all versions
 INV_VERSION := Invictus-$(INV_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(INV_BUILD_TYPE)$(INV_POSTFIX)
 INV_MOD_VERSION := Invictus-$(INV_BUILD)-$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)-$(INV_BUILD_TYPE)$(INV_POSTFIX)
@@ -223,7 +231,8 @@ ADDITIONAL_BUILD_PROPERTIES += \
     invictus.ota.version=$(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE) \
     ro.invictus.version=$(INV_VERSION) \
     ro.modversion=$(INV_MOD_VERSION) \
-    ro.invictus.buildtype=$(INV_BUILD_TYPE)
+    ro.invictus.buildtype=$(INV_BUILD_TYPE) \
+    ro.inv.maintainer=$(INV_MAINTAINER)
 
 # Google sounds
 include vendor/invictus/google/GoogleAudio.mk
