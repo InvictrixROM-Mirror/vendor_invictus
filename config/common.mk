@@ -96,13 +96,13 @@ PRODUCT_PACKAGES += \
     Calculator \
     LatinIME \
     BluetoothExt \
-    Jelly
+    Jelly \
 #    WolvesDen \
 #    ThemeInterfacer \
 #    Eleven \
 #    OmniSwitch \
 #    OmniJaws \
-#    OmniStyle \
+    OmniStyle
 #    Turbo \
 #    GZRoms \
 #    Nova \
