@@ -175,6 +175,9 @@ WITH_CM_CHARGER := false
 PRODUCT_PACKAGES += \
     ThemeInterfacer
 
+# Themes
+$(call inherit-product, vendor/invictus/Themes/Themes.mk)
+
 # Turbo
 PRODUCT_PACKAGES += \
     Turbo
