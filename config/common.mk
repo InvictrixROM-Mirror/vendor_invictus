@@ -171,6 +171,9 @@ WITH_CM_CHARGER := false
 #ifeq ($(DEFAULT_ROOT_METHOD),rootless)
 #endif
 
+# Themes
+$(call inherit-product, vendor/invictus/Themes/Themes.mk)
+
 # Turbo
 PRODUCT_PACKAGES += \
     Turbo
