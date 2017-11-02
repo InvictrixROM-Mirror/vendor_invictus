@@ -173,8 +173,8 @@ WITH_CM_CHARGER := false
 #endif
 
 # ThemeInterfacer
-PRODUCT_PACKAGES += \
-    ThemeInterfacer
+#PRODUCT_PACKAGES += \
+#    ThemeInterfacer
 
 # Themes
 $(call inherit-product, vendor/invictus/Themes/Themes.mk)
