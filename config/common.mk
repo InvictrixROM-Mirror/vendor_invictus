@@ -178,16 +178,6 @@ $(call inherit-product, vendor/invictus/Themes/Themes.mk)
 PRODUCT_PACKAGES += \
     Turbo
 
-# Stagefright FFMPEG plugin
-PRODUCT_PACKAGES += \
-    libffmpeg_extractor \
-    libffmpeg_omx \
-    media_codecs_ffmpeg.xml
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    media.sf.omx-plugin=libffmpeg_omx.so \
-    media.sf.extractor-plugin=libffmpeg_extractor.so
-
 # Storage manager
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.storage_manager.enabled=true
