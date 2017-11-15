@@ -123,6 +123,14 @@ PRODUCT_PACKAGES += \
     ntfsfix \
     ntfs-3g
 
+# ExFAT support
+EXFAT_FUSE ?= true
+ifeq ($(WITH_EXFAT),true)
+TARGET_USES_EXFAT := true
+PRODUCT_PACKAGES += \
+    mount.exfat 
+endif
+
 WITH_CM_CHARGER := false
 
 # MusicFX advanced effects
