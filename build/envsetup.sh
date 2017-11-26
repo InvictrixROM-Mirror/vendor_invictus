@@ -305,7 +305,59 @@ dir=$ANDROID_BUILD_TOP/prebuilts/gcc/linux-x86/
      fi
 }
 
+function buildtype() {
+echo "Now choose your rom build type"
+echo " 1) Unofficial (clears all buildtypes)"
+echo " 2) Experimental"
+echo " 3) Nightly"
+echo " 4) Weekly"
+echo " 5) Release"
+echo " 6) Custom entry"
+echo "Choose number selection[7 and above = exit]:"
+read input
+if [[ "$input" == "1" ]];then
+unset BUILDTYPE_EXPERIMENTAL
+unset BUILDTYPE_NIGHTLY
+unset BUILDTYPE_WEEKLY
+unset BUILDTYPE_RELEASE
+unset INV_BUILD_TYPE
+elif [[ "$input" == "2" ]];then
+export BUILDTYPE_EXPERIMENTAL=true
+elif [[ "$input" == "3" ]]; then
+export BUILDTYPE_NIGHTLY=true
+elif [ "$input" == "4" ];then
+export BUILDTYPE_WEEKLY=true
+elif [ "$input" == "5" ];then
+export BUILDTYPE_RELEASE=true
+elif [ "$input" == "6" ];then
+buildtype-custom
+elif [ "$input" -gt "6" ];then
+echo "Exiting .... "
+return
+fi
+}
+
+function buildtype-custom() {
+unset BUILDTYPE_EXPERIMENTAL
+unset BUILDTYPE_NIGHTLY
+unset BUILDTYPE_WEEKLY
+unset BUILDTYPE_RELEASE
+if [[ $INV_BUILD_TYPE != "" ]];then
+echo "Current custom entry: $DESO_BUILD_TYPE"
+echo
+fi
+echo "Input MUST be alphanumeric!"
+echo "Enter your desired text [99 to return to main]:"
+read input
+if [[ "$input" == "99" ]];then
+buildtype
+else
+export INV_BUILD_TYPE=$input
+fi
+}
+
 invictus_append_hmm "gzospremote" "Add a git remote for matching gzosp repository"
 invictus_append_hmm "aospremote" "Add git remote for matching AOSP repository"
 invictus_append_hmm "cafremote" "Add git remote for matching CodeAurora repository."
 invictus_add_hmm_entry "tclist"  "List available toolchain options."
+invictus_add_hmm_entry "buildtype"  "Adjust release type(s)"

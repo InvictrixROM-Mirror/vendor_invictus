@@ -209,8 +209,24 @@ ifdef INV_BUILD_EXTRA
     INV_POSTFIX := -$(INV_BUILD_EXTRA)
 endif
 
+ifdef BUILDTYPE_EXPERIMENTAL
+    INV_BUILD_TYPE := Experimental
+endif
+
+ifdef BUILDTYPE_NIGHTLY
+    INV_BUILD_TYPE :=  Nightly
+endif
+
+ifdef BUILDTYPE_WEEKLY
+    INV_BUILD_TYPE :=  Weekly
+endif
+
+ifdef BUILDTYPE_RELEASE
+    INV_BUILD_TYPE := Release
+endif
+
 ifndef INV_BUILD_TYPE
-    INV_BUILD_TYPE := UNOFFICIAL
+    INV_BUILD_TYPE := Unofficial
 endif
 
 ifeq ($(INV_MAINTAINER),)
