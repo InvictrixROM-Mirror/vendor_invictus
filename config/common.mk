@@ -209,8 +209,8 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/invictus/overlay/common
 # Versioning System
 # invictus first version.
 PRODUCT_VERSION_MAJOR = 8.0
-PRODUCT_VERSION_MINOR = Alpha
-PRODUCT_VERSION_MAINTENANCE = 1.0
+PRODUCT_VERSION_MINOR = PreRelease
+PRODUCT_VERSION_MAINTENANCE = 1.1
 INV_POSTFIX := -$(shell date +"%Y%m%d-%H%M")
 ifdef INV_BUILD_EXTRA
     INV_POSTFIX := -$(INV_BUILD_EXTRA)
